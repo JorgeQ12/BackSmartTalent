@@ -14,6 +14,7 @@ using BackSmartTalent.Resources;
 using BackSmartTalent.Validators;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,7 +23,15 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    // Ruta al archivo XML de documentación
+    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+
+    // Incluir el archivo XML de documentación en Swagger
+    c.IncludeXmlComments(xmlPath);
+});
 builder.Services.AddAutoMapper(typeof(GlobalMapper));
 builder.Services.AddDbContext<DbContextSmartTalent>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DbConeccionSQL")));
