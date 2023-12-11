@@ -49,7 +49,7 @@ namespace BackSmartTalent.Application.Services.Login
             {
                 throw new Exception(ex.Message);
             }
-        }
+        } 
 
         ///<summary>
         ///Login de Usuarios
