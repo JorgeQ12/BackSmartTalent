@@ -9,12 +9,12 @@ namespace BackSmartTalent
 {
     public class DbContextSmartTalent :DbContext
     {
-        public DbSet<Habitaciones> Habitaciones { get; set; }
-        public DbSet<Hoteles> Hoteles { get; set; }
-        public DbSet<Huespedes> Huespedes { get; set; }
-        public DbSet<Reservas> Reservas { get; set; }
-        public DbSet<ContactoEmergencia> ContactoEmergencia { get; set; }
-        public DbSet<Usuario> Usuario { get; set; }
+        public DbSet<Rooms> Rooms { get; set; }
+        public DbSet<Hotels> Hotels { get; set; }
+        public DbSet<Guests> Guests { get; set; }
+        public DbSet<Reservations> Reservations { get; set; }
+        public DbSet<ContactEmergency> ContactEmergency { get; set; }
+        public DbSet<User> User { get; set; }
 
 
         public DbContextSmartTalent(DbContextOptions<DbContextSmartTalent> options) : base(options)
@@ -24,10 +24,10 @@ namespace BackSmartTalent
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Hoteles>()
-                .HasMany(hotel => hotel.Habitaciones)
-                .WithOne(habitacion => habitacion.HotelesNavigation)
-                .HasForeignKey(habitacion => habitacion.IdHotel);
+            modelBuilder.Entity<Hotels>()
+                .HasMany(hotel => hotel.Rooms)
+                .WithOne(habitacion => habitacion.HotelsNavigation)
+                .HasForeignKey(habitacion => habitacion.IdHotels);
         }
     }
 }

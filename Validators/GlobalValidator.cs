@@ -11,173 +11,173 @@ namespace BackSmartTalent.Validators
 {
     public class GlobalValidator
     {
-        public ResultResponse<Usuario> validateUser(UsuarioDTO usuario)
+        public ResultResponse<User> validateUser(UserDTO user)
         {
 
-            if (string.IsNullOrWhiteSpace(usuario.NombreUsuarioDTO))
+            if (string.IsNullOrWhiteSpace(user.UsernameDTO))
             {
-                return new ResultResponse<Usuario>(false, RespuestasGlobales.LoginNombreUsuario);
+                return new ResultResponse<User>(false, GlobalResponses.LoginNombreUsuario);
             }
 
-            if (string.IsNullOrWhiteSpace(usuario.ContraseñaDTO))
+            if (string.IsNullOrWhiteSpace(user.PasswordDTO))
             {
-                return new ResultResponse<Usuario>(false, RespuestasGlobales.LoginContraseñaUsuario);
+                return new ResultResponse<User>(false, GlobalResponses.LoginContraseñaUsuario);
             }
 
             return null;
         }
 
-        public ResultResponse<Habitaciones> ValidarHabitacion(HabitacionesDTO habitaciones)
+        public ResultResponse<Rooms> ValidarHabitacion(RoomsDTO rooms)
         {
-            if (habitaciones.IdHotelDTO.Equals(Guid.Empty))
+            if (rooms.IdHotelsDTO.Equals(Guid.Empty))
             {
-                return new ResultResponse<Habitaciones>(false, RespuestasGlobales.NoRelacionHotel);
+                return new ResultResponse<Rooms>(false, GlobalResponses.NoRelacionHotel);
             }
 
-            if (string.IsNullOrWhiteSpace(habitaciones.TipoHabitacionDTO))
+            if (string.IsNullOrWhiteSpace(rooms.TypeRoomDTO))
             {
-                return new ResultResponse<Habitaciones>(false, RespuestasGlobales.ErrorNombreHotel);
+                return new ResultResponse<Rooms>(false, GlobalResponses.ErrorNombreHotel);
             }
 
-            if (habitaciones.CantidadPersonasDTO <= 0)
+            if (rooms.NumberPeopleDTO <= 0)
             {
-                return new ResultResponse<Habitaciones>(false, RespuestasGlobales.CantidadPersonasCero);
+                return new ResultResponse<Rooms>(false, GlobalResponses.CantidadPersonasCero);
             }
 
-            if (habitaciones.CostoBaseDTO <= 0)
+            if (rooms.CostBaseDTO <= 0)
             {
-                return new ResultResponse<Habitaciones>(false, RespuestasGlobales.PrecioHotelIncorrecto);
+                return new ResultResponse<Rooms>(false, GlobalResponses.PrecioHotelIncorrecto);
             }
 
-            if (habitaciones.ImpuestosDTO <= 0)
+            if (rooms.TaxesDTO <= 0)
             {
-                return new ResultResponse<Habitaciones>(false, RespuestasGlobales.ImpuestoHotelIncorrecto);
+                return new ResultResponse<Rooms>(false, GlobalResponses.ImpuestoHotelIncorrecto);
             }
 
-            if (string.IsNullOrWhiteSpace(habitaciones.UbicacionDTO))
+            if (string.IsNullOrWhiteSpace(rooms.LocationDTO))
             {
-                return new ResultResponse<Habitaciones>(false, RespuestasGlobales.ErrorDireccionHotel);
+                return new ResultResponse<Rooms>(false, GlobalResponses.ErrorDireccionHotel);
             }
 
             return null;
         }
 
-        public ResultResponse<Hoteles> ValidarHotel(HotelesDTO hoteles)
+        public ResultResponse<Hotels> ValidarHotel(HotelsDTO hotels)
         {
-            if (string.IsNullOrWhiteSpace(hoteles.NombreDTO))
+            if (string.IsNullOrWhiteSpace(hotels.NamesDTO))
             {
-                return new ResultResponse<Hoteles>(false, RespuestasGlobales.ErrorNombreHotel);
+                return new ResultResponse<Hotels>(false, GlobalResponses.ErrorNombreHotel);
             }
-            if (string.IsNullOrWhiteSpace(hoteles.DireccionDTO))
+            if (string.IsNullOrWhiteSpace(hotels.AddressDTO))
             {
-                return new ResultResponse<Hoteles>(false, RespuestasGlobales.ErrorDireccionHotel);
+                return new ResultResponse<Hotels>(false, GlobalResponses.ErrorDireccionHotel);
             }
 
             return null;
         }
 
-        public ResultResponse<Hoteles> ValidarHotelUpdate(HotelesUpdateDTO hoteles)
+        public ResultResponse<Hotels> ValidarHotelUpdate(HotelsUpdateDTO hotels)
         {
-            if (hoteles.IdHotelDTO.Equals(Guid.Empty))
+            if (hotels.IdHotelsDTO.Equals(Guid.Empty))
             {
-                return new ResultResponse<Hoteles>(false, RespuestasGlobales.ErrorIdHotel);
+                return new ResultResponse<Hotels>(false, GlobalResponses.ErrorIdHotel);
             }
-            if (string.IsNullOrWhiteSpace(hoteles.NombreDTO))
+            if (string.IsNullOrWhiteSpace(hotels.NamesDTO))
             {
-                return new ResultResponse<Hoteles>(false, RespuestasGlobales.ErrorNombreHotel);
+                return new ResultResponse<Hotels>(false, GlobalResponses.ErrorNombreHotel);
             }
-            if (string.IsNullOrWhiteSpace(hoteles.DireccionDTO))
+            if (string.IsNullOrWhiteSpace(hotels.AddressDTO))
             {
-                return new ResultResponse<Hoteles>(false, RespuestasGlobales.ErrorDireccionHotel);
+                return new ResultResponse<Hotels>(false, GlobalResponses.ErrorDireccionHotel);
             }
 
             return null;
         }
 
-        public ResultResponse<Habitaciones> ValidarHabitacionUpdate(HabitacionesUpdateDTO habitaciones)
+        public ResultResponse<Rooms> ValidarHabitacionUpdate(RoomsUpdateDTO rooms)
         {
-            if (habitaciones.IdHabitacionDTO.Equals(Guid.Empty))
+            if (rooms.IdRoomDTO.Equals(Guid.Empty))
             {
-                return new ResultResponse<Habitaciones>(false, RespuestasGlobales.NoRelacionHabitacion);
+                return new ResultResponse<Rooms>(false, GlobalResponses.NoRelacionHabitacion);
             }
-            if (habitaciones.IdHotelDTO.Equals(Guid.Empty))
+            if (rooms.IdHotelsDTO.Equals(Guid.Empty))
             {
-                return new ResultResponse<Habitaciones>(false, RespuestasGlobales.NoRelacionHotel);
-            }
-
-            if (string.IsNullOrWhiteSpace(habitaciones.TipoHabitacionDTO))
-            {
-                return new ResultResponse<Habitaciones>(false, RespuestasGlobales.ErrorNombreHotel);
+                return new ResultResponse<Rooms>(false, GlobalResponses.NoRelacionHotel);
             }
 
-            if (habitaciones.CantidadPersonasDTO <= 0)
+            if (string.IsNullOrWhiteSpace(rooms.TypeRoomDTO))
             {
-                return new ResultResponse<Habitaciones>(false, RespuestasGlobales.CantidadPersonasCero);
+                return new ResultResponse<Rooms>(false, GlobalResponses.ErrorNombreHotel);
             }
 
-            if (habitaciones.CostoBaseDTO <= 0)
+            if (rooms.NumberPeopleDTO <= 0)
             {
-                return new ResultResponse<Habitaciones>(false, RespuestasGlobales.PrecioHotelIncorrecto);
+                return new ResultResponse<Rooms>(false, GlobalResponses.CantidadPersonasCero);
             }
 
-            if (habitaciones.ImpuestosDTO <= 0)
+            if (rooms.CostBaseDTO <= 0)
             {
-                return new ResultResponse<Habitaciones>(false, RespuestasGlobales.ImpuestoHotelIncorrecto);
+                return new ResultResponse<Rooms>(false, GlobalResponses.PrecioHotelIncorrecto);
             }
 
-            if (string.IsNullOrWhiteSpace(habitaciones.UbicacionDTO))
+            if (rooms.TaxesDTO <= 0)
             {
-                return new ResultResponse<Habitaciones>(false, RespuestasGlobales.ErrorDireccionHotel);
+                return new ResultResponse<Rooms>(false, GlobalResponses.ImpuestoHotelIncorrecto);
+            }
+
+            if (string.IsNullOrWhiteSpace(rooms.LocationDTO))
+            {
+                return new ResultResponse<Rooms>(false, GlobalResponses.ErrorDireccionHotel);
             }
 
             return null;
         }
 
-        public ResultResponse<List<HotelesByCondition>> ValidateHotelByCondition(DateTime fechaEntrada, DateTime fechaSalida, int CantidadPersonas, string ciudad)
+        public ResultResponse<List<HotelsByCondition>> ValidateHotelByCondition(DateTime entryDate, DateTime departureDate, int numberPeople, string city)
         {
-            if (fechaEntrada >= fechaSalida)
+            if (entryDate >= departureDate)
             {
-                return new ResultResponse<List<HotelesByCondition>>(false, RespuestasGlobales.ReservaFechasInvalidas);
+                return new ResultResponse<List<HotelsByCondition>>(false, GlobalResponses.ReservaFechasInvalidas);
             }
 
-            if (CantidadPersonas <= 0)
+            if (numberPeople <= 0)
             {
-                return new ResultResponse<List<HotelesByCondition>>(false, RespuestasGlobales.ReservaCantidadPersonasInvalida);
+                return new ResultResponse<List<HotelsByCondition>>(false, GlobalResponses.ReservaCantidadPersonasInvalida);
             }
 
-            if (string.IsNullOrWhiteSpace(ciudad))
+            if (string.IsNullOrWhiteSpace(city))
             {
-                return new ResultResponse<List<HotelesByCondition>>(false, RespuestasGlobales.ReservaCiudadDestinoRequerido);
+                return new ResultResponse<List<HotelsByCondition>>(false, GlobalResponses.ReservaCiudadDestinoRequerido);
             }
 
             return null;
         }
 
-        public ResultResponse<Reservas> ValidateBooking(InsertBookingDTO reserva)
+        public ResultResponse<Reservations> ValidateBooking(InsertBookingDTO booking)
         {
-            if (reserva.IdHabitacionDTO.Equals(Guid.Empty))
+            if (booking.IdRoomDTO.Equals(Guid.Empty))
             {
-                return new ResultResponse<Reservas>(false, RespuestasGlobales.ReservaIdHabitacionRequerido);
+                return new ResultResponse<Reservations>(false, GlobalResponses.ReservaIdHabitacionRequerido);
             }
 
-            if (reserva.HuespedesDTO == null)
+            if (booking.GuestsDTO == null)
             {
-                return new ResultResponse<Reservas>(false, RespuestasGlobales.ReservaHuespedesRequerido);
+                return new ResultResponse<Reservations>(false, GlobalResponses.ReservaHuespedesRequerido);
             }
 
-            if (reserva.FechaEntradaDTO >= reserva.FechaSalidaDTO)
+            if (booking.EntryDateDTO >= booking.DepartureDateDTO)
             {
-                return new ResultResponse<Reservas>(false, RespuestasGlobales.ReservaFechasInvalidas);
+                return new ResultResponse<Reservations>(false, GlobalResponses.ReservaFechasInvalidas);
             }
 
-            if (reserva.CantidadPersonasDTO <= 0)
+            if (booking.NumberPeopleDTO <= 0)
             {
-                return new ResultResponse<Reservas>(false, RespuestasGlobales.ReservaCantidadPersonasInvalida);
+                return new ResultResponse<Reservations>(false, GlobalResponses.ReservaCantidadPersonasInvalida);
             }
 
-            if (string.IsNullOrWhiteSpace(reserva.CiudadDestinoDTO))
+            if (string.IsNullOrWhiteSpace(booking.CityDestinationDTO))
             {
-                return new ResultResponse<Reservas>(false, RespuestasGlobales.ReservaCiudadDestinoRequerido);
+                return new ResultResponse<Reservations>(false, GlobalResponses.ReservaCiudadDestinoRequerido);
             }
 
             return null;

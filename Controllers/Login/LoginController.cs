@@ -25,13 +25,13 @@ namespace BackSmartTalent.Controllers.Login
         ///</summary>
         [HttpPost]
         [Route(nameof(LoginController.GetLoginAdmin))]
-        public ResultResponse<Usuario> GetLoginAdmin(UsuarioDTO usuario) => _LoginAppServices.GetLoginAdmin(usuario);
+        public ResultResponse<User> GetLoginAdmin(UserDTO user) => _LoginAppServices.GetLoginAdmin(user);
 
         ///<summary>
         ///Login de Usuarios
         ///</summary>
         [HttpPost]
         [Route(nameof(LoginController.GetLoginUser))]
-        public ResultResponse<Usuario> GetLoginUser(UsuarioDTO usuario) => _LoginAppServices.GetLoginUser(usuario);
+        public ResultResponse<User> GetLoginUser(UserDTO user) => _LoginAppServices.GetLoginUser(user);
     }
 }

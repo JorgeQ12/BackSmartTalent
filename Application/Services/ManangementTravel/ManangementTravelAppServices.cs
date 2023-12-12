@@ -30,23 +30,23 @@ namespace BackSmartTalent.Application.Services.ManangementTravel
         ///<summary>
         ///Traer reservas
         ///</summary>
-        public ResultResponse<List<HotelesByCondition>> GetHotelByCondition(DateTime fechaEntrada, DateTime fechaSalida, int CantidadPersonas, string ciudad)
+        public ResultResponse<List<HotelsByCondition>> GetHotelByCondition(DateTime entryDate, DateTime departureDate, int numberPeople, string city)
         {
             try
             {
-                var validacionResult = _globalValidator.ValidateHotelByCondition(fechaEntrada, fechaSalida, CantidadPersonas, ciudad);
+                var validacionResult = _globalValidator.ValidateHotelByCondition(entryDate, departureDate, numberPeople, city);
                 if (validacionResult != null)
                 {
                     return validacionResult;
                 }
 
-                List<HotelesByCondition> hotelesFind = _IManangementTravelDomainServices.GetHotelByCondition(fechaEntrada, fechaSalida, CantidadPersonas, ciudad);
+                List<HotelsByCondition> hotelesFind = _IManangementTravelDomainServices.GetHotelByCondition(entryDate, departureDate, numberPeople, city);
                 if(hotelesFind.Count() > 0)
                 {
-                    return new ResultResponse<List<HotelesByCondition>>(true, hotelesFind);
+                    return new ResultResponse<List<HotelsByCondition>>(true, hotelesFind);
                 }
 
-                return new ResultResponse<List<HotelesByCondition>>(true, RespuestasGlobales.NoHotelByCondition);
+                return new ResultResponse<List<HotelsByCondition>>(true, GlobalResponses.NoHotelByCondition);
             }
             catch (Exception ex)
             {
@@ -57,7 +57,7 @@ namespace BackSmartTalent.Application.Services.ManangementTravel
         ///<summary>
         ///Insertar Reserva 
         ///</summary>
-        public ResultResponse<Reservas> InsertBooking(InsertBookingDTO insertBooking)
+        public ResultResponse<Reservations> InsertBooking(InsertBookingDTO insertBooking)
         {
             try
             {
@@ -68,14 +68,14 @@ namespace BackSmartTalent.Application.Services.ManangementTravel
                 }
 
                 //Insertamos Huesped y devolvemos el ID para la relacion.
-                Guid idHuesped = _IManangementTravelDomainServices.InsertHuesped(_mapper.Map<HuespedesDTO, Huespedes>(insertBooking.HuespedesDTO));
+                Guid idGuest = _IManangementTravelDomainServices.InsertHuesped(_mapper.Map<GuestsDTO, Guests>(insertBooking.GuestsDTO));
 
-                _IManangementTravelDomainServices.InsertBooking(_mapper.Map<InsertBookingDTO, Reservas>(insertBooking), idHuesped);
+                _IManangementTravelDomainServices.InsertBooking(_mapper.Map<InsertBookingDTO, Reservations>(insertBooking), idGuest);
 
                 //Enviar correo de confirmacion
                 _sendEmail.Main(insertBooking);
 
-                return new ResultResponse<Reservas>(true, RespuestasGlobales.ReservaInsertada);
+                return new ResultResponse<Reservations>(true, GlobalResponses.ReservaInsertada);
             }
             catch (Exception ex)
             {

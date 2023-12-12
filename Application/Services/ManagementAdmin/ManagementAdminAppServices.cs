@@ -28,16 +28,16 @@ namespace BackSmartTalent.Application.Services.ManagementAdmin
         ///<summary>
         ///Traer reservas
         ///</summary>
-        public ResultResponse<List<ReservasDTO>> GetBooking()
+        public ResultResponse<List<ReservationsDTO>> GetBooking()
         {
             try
             {
-                List<ReservasDTO> reservas = _IManagementAdminDomainServices.GetBooking();
-                if(reservas.Count() > 0)
+                List<ReservationsDTO> reservations = _IManagementAdminDomainServices.GetBooking();
+                if(reservations.Count() > 0)
                 {
-                    return new ResultResponse<List<ReservasDTO>>(true, reservas);
+                    return new ResultResponse<List<ReservationsDTO>>(true, reservations);
                 }
-                return new ResultResponse<List<ReservasDTO>>(true, RespuestasGlobales.NoBooking);
+                return new ResultResponse<List<ReservationsDTO>>(true, GlobalResponses.NoBooking);
             }
             catch (Exception ex)
             {
@@ -48,20 +48,20 @@ namespace BackSmartTalent.Application.Services.ManagementAdmin
         ///<summary>
         ///Insertar Hoteles
         ///</summary>
-        public ResultResponse<Hoteles> InsertHotel(HotelesDTO hoteles)
+        public ResultResponse<Hotels> InsertHotel(HotelsDTO hotels)
         {
             try
             {
                 //Validaciones
-                var validacionResult = _globalValidator.ValidarHotel(hoteles);
+                var validacionResult = _globalValidator.ValidarHotel(hotels);
                 if (validacionResult != null)
                 {
                     return validacionResult;
                 }
 
-                _IManagementAdminDomainServices.InsertHotel(_mapper.Map<HotelesDTO, Hoteles>(hoteles));
+                _IManagementAdminDomainServices.InsertHotel(_mapper.Map<HotelsDTO, Hotels>(hotels));
 
-                return new ResultResponse<Hoteles>(true, RespuestasGlobales.HotelCreadoCorrectamente);
+                return new ResultResponse<Hotels>(true, GlobalResponses.HotelCreadoCorrectamente);
             }
             catch (Exception ex)
             {
@@ -69,20 +69,20 @@ namespace BackSmartTalent.Application.Services.ManagementAdmin
             }
         }
 
-        public ResultResponse<Habitaciones> InsertRoomByHotel(HabitacionesDTO habitaciones)
+        public ResultResponse<Rooms> InsertRoomByHotel(RoomsDTO rooms)
         {
             try
             {
                 //Validaciones
-                var validacionResult = _globalValidator.ValidarHabitacion(habitaciones);
+                var validacionResult = _globalValidator.ValidarHabitacion(rooms);
                 if (validacionResult != null)
                 {
                     return validacionResult;
                 }
 
-                _IManagementAdminDomainServices.InsertRoomByHotel(_mapper.Map<HabitacionesDTO, Habitaciones>(habitaciones));
+                _IManagementAdminDomainServices.InsertRoomByHotel(_mapper.Map<RoomsDTO, Rooms>(rooms));
 
-                return new ResultResponse<Habitaciones>(true, RespuestasGlobales.HabitacionCreadoCorrectamente);
+                return new ResultResponse<Rooms>(true, GlobalResponses.HabitacionCreadoCorrectamente);
             }
             catch (Exception ex)
             {
@@ -90,27 +90,27 @@ namespace BackSmartTalent.Application.Services.ManagementAdmin
             }
         }
 
-        public ResultResponse<Hoteles> UpdateHotel(HotelesUpdateDTO hoteles)
+        public ResultResponse<Hotels> UpdateHotel(HotelsUpdateDTO hotels)
         {
             try
             {
                 //Validaciones
-                var validacionResult = _globalValidator.ValidarHotelUpdate(hoteles);
+                var validacionResult = _globalValidator.ValidarHotelUpdate(hotels);
                 if (validacionResult != null)
                 {
                     return validacionResult;
                 }
 
                 //Obtenemos el Hotel
-                var hotelExistente = _IManagementAdminDomainServices.GetHotelById(hoteles.IdHotelDTO);
-                if (hotelExistente == null)
+                var hotelExist = _IManagementAdminDomainServices.GetHotelById(hotels.IdHotelsDTO);
+                if (hotelExist == null)
                 {
-                    return new ResultResponse<Hoteles>(false, RespuestasGlobales.NoFoundHotel);
+                    return new ResultResponse<Hotels>(false, GlobalResponses.NoFoundHotel);
                 }
 
-                _IManagementAdminDomainServices.UpdateHotel(_mapper.Map(hoteles, hotelExistente));
+                _IManagementAdminDomainServices.UpdateHotel(_mapper.Map(hotels, hotelExist));
 
-                return new ResultResponse<Hoteles>(true, RespuestasGlobales.HotelActualizadoCorrectamente);
+                return new ResultResponse<Hotels>(true, GlobalResponses.HotelActualizadoCorrectamente);
             }
             catch (Exception ex)
             {
@@ -118,27 +118,27 @@ namespace BackSmartTalent.Application.Services.ManagementAdmin
             }
         }
 
-        public ResultResponse<Habitaciones> UpdateRoom(HabitacionesUpdateDTO habitaciones)
+        public ResultResponse<Rooms> UpdateRoom(RoomsUpdateDTO rooms)
         {
             try
             {
                 //Validaciones
-                var validacionResult = _globalValidator.ValidarHabitacionUpdate(habitaciones);
+                var validacionResult = _globalValidator.ValidarHabitacionUpdate(rooms);
                 if (validacionResult != null)
                 {
                     return validacionResult;
                 }
 
                 //Obtenemos la habitacion
-                var habitacionExistente = _IManagementAdminDomainServices.GetRoomById(habitaciones.IdHabitacionDTO);
-                if(habitacionExistente == null)
+                var roomsExist = _IManagementAdminDomainServices.GetRoomById(rooms.IdRoomDTO);
+                if(roomsExist == null)
                 {
-                    return new ResultResponse<Habitaciones>(false, RespuestasGlobales.NoFoundRoom);
+                    return new ResultResponse<Rooms>(false, GlobalResponses.NoFoundRoom);
                 }
 
-                _IManagementAdminDomainServices.UpdateRoom(_mapper.Map(habitaciones, habitacionExistente));
+                _IManagementAdminDomainServices.UpdateRoom(_mapper.Map(rooms, roomsExist));
 
-                return new ResultResponse<Habitaciones>(true, RespuestasGlobales.HabitacionActualizadaCorrectamente);
+                return new ResultResponse<Rooms>(true, GlobalResponses.HabitacionActualizadaCorrectamente);
             }
             catch (Exception ex)
             {

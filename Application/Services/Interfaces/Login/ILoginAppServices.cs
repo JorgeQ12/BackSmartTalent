@@ -13,12 +13,12 @@ namespace BackSmartTalent.Application.Services.Interfaces.Login
         ///<summary>
         ///Login de Administradores
         ///</summary>
-        ResultResponse<Usuario> GetLoginAdmin(UsuarioDTO usuario);
+        ResultResponse<User> GetLoginAdmin(UserDTO user);
 
         ///<summary>
         ///Login de Usuarios
         ///</summary>
-        ResultResponse<Usuario> GetLoginUser(UsuarioDTO usuario);
+        ResultResponse<User> GetLoginUser(UserDTO user);
 
     }
 }

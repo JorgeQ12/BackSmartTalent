@@ -26,13 +26,13 @@ namespace BackSmartTalent.Controllers.ManangementTravel
         ///</summary>
         [HttpGet]
         [Route(nameof(ManangementTravelController.GetHotelByCondition))]
-        public ResultResponse<List<HotelesByCondition>> GetHotelByCondition(DateTime fechaEntrada, DateTime fechaSalida, int CantidadPersonas, string ciudad) => _ManangementTravelAppServices.GetHotelByCondition(fechaEntrada, fechaSalida, CantidadPersonas, ciudad);
+        public ResultResponse<List<HotelsByCondition>> GetHotelByCondition(DateTime entryDate, DateTime departureDate, int numberPeople, string city) => _ManangementTravelAppServices.GetHotelByCondition(entryDate, departureDate, numberPeople, city);
 
         ///<summary>
         ///Insertar Reserva 
         ///</summary>
         [HttpPost]
         [Route(nameof(ManangementTravelController.InsertBooking))]
-        public ResultResponse<Reservas> InsertBooking(InsertBookingDTO insertBooking) => _ManangementTravelAppServices.InsertBooking(insertBooking);
+        public ResultResponse<Reservations> InsertBooking(InsertBookingDTO insertBooking) => _ManangementTravelAppServices.InsertBooking(insertBooking);
     }
 }

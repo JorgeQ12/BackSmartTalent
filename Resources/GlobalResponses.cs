@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace BackSmartTalent.Resources
 {
-    public class RespuestasGlobales
+    public class GlobalResponses
     {
 
         public const string LoginNombreUsuario = "El campo Nombre de Usuario es obligatorio";

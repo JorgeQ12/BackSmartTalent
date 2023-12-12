@@ -20,27 +20,27 @@ namespace BackSmartTalent.Application.Services.ManagementAdmin
         ///<summary>
         ///Traer reservas
         ///</summary>
-        public List<ReservasDTO> GetBooking()
+        public List<ReservationsDTO> GetBooking()
         {
             try
             {
-                return _context.Reservas
-                        .Include(x => x.Habitaciones)
-                            .ThenInclude(y => y.HotelesNavigation)
-                        .Where(x => x.Activo)
-                        .Select(x => new ReservasDTO
+                return _context.Reservations
+                        .Include(x => x.Rooms)
+                            .ThenInclude(y => y.HotelsNavigation)
+                        .Where(x => x.Enabled)
+                        .Select(x => new ReservationsDTO
                         {
-                            NombreHotelDTO = x.Habitaciones.HotelesNavigation.Nombre.ToString(),
-                            DireccionHotelDTO = x.Habitaciones.HotelesNavigation.Direccion.ToString(),
-                            TipoHabitacionDTO = x.Habitaciones.TipoHabitacion.ToString(),
-                            CostoBaseDTO = x.Habitaciones.CostoBase,
-                            ImpuestosDTO = x.Habitaciones.Impuestos,
-                            UbicacionHabitacionDTO = x.Habitaciones.Ubicacion.ToString(),
-                            FechaEntradaDTO = x.FechaEntrada,
-                            FechaSalidaDTO = x.FechaSalida,
-                            CantidadPersonasDTO = x.CantidadPersonas,
-                            CiudadDestinoDTO = x.CiudadDestino.ToString(),
-                            ActivoDTO = x.Activo
+                            NamesHotelsDTO = x.Rooms.HotelsNavigation.Names.ToString(),
+                            AddressHotelsDTO = x.Rooms.HotelsNavigation.Address.ToString(),
+                            TypeRoomDTO = x.Rooms.TypeRoom.ToString(),
+                            CostBaseDTO = x.Rooms.CostBase,
+                            TaxesDTO = x.Rooms.Taxes,
+                            LocationRoomDTO = x.Rooms.Location.ToString(),
+                            EntryDateDTO = x.EntryDate,
+                            DepartureDateDTO = x.DepartureDate,
+                            NumberPeopleDTO = x.NumberPeople,
+                            CityDestinationDTO = x.CityDestination.ToString(),
+                            EnabledDTO = x.Enabled
                         }).ToList();
             }
             catch (Exception ex)
@@ -52,13 +52,13 @@ namespace BackSmartTalent.Application.Services.ManagementAdmin
         ///<summary>
         ///Insertar Hoteles
         ///</summary>
-        public Hoteles InsertHotel(Hoteles hotel)
+        public Hotels InsertHotel(Hotels hotels)
         {
             try
             {
-                _context.Add(hotel);
+                _context.Add(hotels);
                 _context.SaveChanges();
-                return hotel;
+                return hotels;
             }
             catch (Exception ex)
             {
@@ -67,15 +67,15 @@ namespace BackSmartTalent.Application.Services.ManagementAdmin
         }
 
         ///<summary>
-        ///Insertar Habitaciones a Hoteles
+        ///Insertar Rooms a Hoteles
         ///</summary>
-        public Habitaciones InsertRoomByHotel(Habitaciones habitaciones)
+        public Rooms InsertRoomByHotel(Rooms rooms)
         {
             try
             {
-                _context.Add(habitaciones);
+                _context.Add(rooms);
                 _context.SaveChanges();
-                return habitaciones;
+                return rooms;
             }
             catch (Exception ex)
             {
@@ -86,11 +86,11 @@ namespace BackSmartTalent.Application.Services.ManagementAdmin
         ///<summary>
         ///Obtener el Hotel Existente
         /// </summary>
-        public Hoteles GetHotelById(Guid id)
+        public Hotels GetHotelById(Guid id)
         {
             try
             {
-                return _context.Hoteles.Where(x => x.Id.Equals(id)).FirstOrDefault();
+                return _context.Hotels.Where(x => x.Id.Equals(id)).FirstOrDefault();
             }
             catch (Exception ex)
             {
@@ -101,11 +101,11 @@ namespace BackSmartTalent.Application.Services.ManagementAdmin
         ///<summary>
         ///Obtener la Habitacion Existente
         /// </summary>
-        public Habitaciones GetRoomById(Guid id)
+        public Rooms GetRoomById(Guid id)
         {
             try
             {
-                return _context.Habitaciones.Where(x => x.Id.Equals(id)).FirstOrDefault();
+                return _context.Rooms.Where(x => x.Id.Equals(id)).FirstOrDefault();
             }
             catch (Exception ex)
             {
@@ -116,13 +116,13 @@ namespace BackSmartTalent.Application.Services.ManagementAdmin
         ///<summary>
         ///Actualizar el hotel existente
         /// </summary>
-        public Hoteles UpdateHotel(Hoteles hoteles)
+        public Hotels UpdateHotel(Hotels hotels)
         {
             try
             {
-                _context.Update(hoteles);
+                _context.Update(hotels);
                 _context.SaveChanges();
-                return hoteles;
+                return hotels;
             }
             catch (Exception ex)
             {
@@ -133,13 +133,13 @@ namespace BackSmartTalent.Application.Services.ManagementAdmin
         ///<summary>
         ///Actualizar la habitacion existente
         /// </summary>
-        public Habitaciones UpdateRoom(Habitaciones habitaciones)
+        public Rooms UpdateRoom(Rooms rooms)
         {
             try
             {
-                _context.Update(habitaciones);
+                _context.Update(rooms);
                 _context.SaveChanges();
-                return habitaciones;
+                return rooms;
             }
             catch (Exception ex)
             {

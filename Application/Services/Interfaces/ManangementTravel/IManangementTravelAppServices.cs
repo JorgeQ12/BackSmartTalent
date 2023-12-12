@@ -13,10 +13,10 @@ namespace BackSmartTalent.Application.Services.Interfaces.ManangementTravel
         ///<summary>
         ///Traer reservas
         ///</summary>
-        ResultResponse<List<HotelesByCondition>> GetHotelByCondition(DateTime fechaEntrada, DateTime fechaSalida, int CantidadPersonas, string ciudad);
+        ResultResponse<List<HotelsByCondition>> GetHotelByCondition(DateTime entryDate, DateTime departureDate, int numberPeople, string city);
         ///<summary>
         ///Insertar Reserva 
         ///</summary>
-        ResultResponse<Reservas> InsertBooking(InsertBookingDTO insertBooking);
+        ResultResponse<Reservations> InsertBooking(InsertBookingDTO insertBooking);
     }
 }

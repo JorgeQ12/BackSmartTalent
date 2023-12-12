@@ -12,21 +12,21 @@ namespace BackSmartTalent.Domain.Services.Interfaces.ManangementTravel
         ///<summary>
         ///Traer reservas
         ///</summary>
-        List<HotelesByCondition> GetHotelByCondition(DateTime fechaEntrada, DateTime fechaSalida, int CantidadPersonas, string ciudad);
+        List<HotelsByCondition> GetHotelByCondition(DateTime entryDate, DateTime departureDate, int numberPeople, string city);
 
         /// <summary>
         /// Insertar Huesped
         /// </summary>
-        /// <param name="huespedes"></param>
+        /// <param name="guests"></param>
         /// <returns></returns>
-        Guid InsertHuesped(Huespedes huespedes);
+        Guid InsertHuesped(Guests guests);
 
         /// <summary>
         /// Insertar Reserva
         /// </summary>
-        /// <param name="reservas"></param>
-        /// <param name="IdHuesped"></param>
+        /// <param name="reservations"></param>
+        /// <param name="IdGuests"></param>
         /// <returns></returns>
-        Reservas InsertBooking(Reservas reservas, Guid IdHuesped);
+        Reservations InsertBooking(Reservations reservations, Guid IdGuests);
     }
 }

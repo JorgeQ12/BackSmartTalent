@@ -22,27 +22,24 @@ namespace BackSmartTalent.Domain.Services.ManangementTravel
         ///<summary>
         ///Traer reservas
         ///</summary>
-        public List<HotelesByCondition> GetHotelByCondition(DateTime fechaEntrada, DateTime fechaSalida, int CantidadPersonas, string ciudad)
+        public List<HotelsByCondition> GetHotelByCondition(DateTime entryDate, DateTime departureDate, int numberPeople, string city)
         {
             try
             {
-                return _context.Hoteles
-                            .Include(x => x.Habitaciones)
-                                .ThenInclude(y => y.ReservasNavigation)
-                            .Where(hotel => hotel.Habitaciones.All(habitacion =>
-                                habitacion.ReservasNavigation.FechaSalida < fechaEntrada ||
-                                habitacion.ReservasNavigation.FechaEntrada > fechaSalida) &&
-                                hotel.Habitaciones.Any(habitacion =>
-                                habitacion.CantidadPersonas.Equals(CantidadPersonas)))
-                            .Where(x => x.Cuidad.Equals(ciudad))
-                            .Select(x => new HotelesByCondition
+                return _context.Hotels
+                            .Include(x => x.Rooms)
+                                .ThenInclude(y => y.ReservationsNavigation)
+                            .Where(x => x.Rooms.All(y => y.ReservationsNavigation.DepartureDate < entryDate || y.ReservationsNavigation.EntryDate > departureDate) 
+                                        && x.Rooms.Any(z => z.NumberPeople.Equals(numberPeople)))
+                            .Where(x => x.City.Equals(city))
+                            .Select(x => new HotelsByCondition
                             {
-                                NombreHotelDTO = x.Nombre.ToString(),
-                                DireccionHotelDTO = x.Direccion.ToString(),
-                                TipoHabitacionDTO = x.Habitaciones.FirstOrDefault().TipoHabitacion.ToString(),
-                                CostoBaseDTO = x.Habitaciones.FirstOrDefault().CostoBase,
-                                ImpuestosDTO = x.Habitaciones.FirstOrDefault().Impuestos,
-                                CantidadPersonasDTO = x.Habitaciones.FirstOrDefault().CantidadPersonas,
+                                NamesHotelsDTO = x.Names.ToString(),
+                                AddressHotelsDTO = x.Address.ToString(),
+                                TypeRoomDTO = x.Rooms.FirstOrDefault().TypeRoom.ToString(),
+                                CostBaseDTO = x.Rooms.FirstOrDefault().CostBase,
+                                TaxesDTO = x.Rooms.FirstOrDefault().Taxes,
+                                NumberPeopleDTO = x.Rooms.FirstOrDefault().NumberPeople,
                             })
                             .ToList();
             }
@@ -55,14 +52,14 @@ namespace BackSmartTalent.Domain.Services.ManangementTravel
         /// <summary>
         /// Insertar Huesped
         /// </summary>
-        /// <param name="huespedes"></param>
+        /// <param name="guests"></param>
         /// <returns></returns>
-        public Guid InsertHuesped(Huespedes huespedes)
+        public Guid InsertHuesped(Guests guests)
         {
             try
             {
-                _context.Add(huespedes);
-                return huespedes.Id;
+                _context.Add(guests);
+                return guests.Id;
             }
             catch (Exception ex)
             {
@@ -73,17 +70,17 @@ namespace BackSmartTalent.Domain.Services.ManangementTravel
         /// <summary>
         /// Insertar Reserva
         /// </summary>
-        /// <param name="reservas"></param>
-        /// <param name="IdHuesped"></param>
+        /// <param name="reservations"></param>
+        /// <param name="IdGuests"></param>
         /// <returns></returns>
-        public Reservas InsertBooking(Reservas reservas, Guid IdHuesped)
+        public Reservations InsertBooking(Reservations reservations, Guid IdGuests)
         {
             try
             {
-                reservas.IdHuespedes = IdHuesped;
-                _context.Add(reservas);
+                reservations.IdGuests = IdGuests;
+                _context.Add(reservations);
                 _context.SaveChanges();
-                return reservas;
+                return reservations;
             }
             catch (Exception ex)
             {

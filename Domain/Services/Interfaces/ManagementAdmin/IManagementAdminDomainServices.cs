@@ -13,30 +13,30 @@ namespace BackSmartTalent.Application.Services.Interfaces.ManagementAdmin
         ///<summary>
         ///Traer reservas
         ///</summary>
-        List<ReservasDTO> GetBooking();
+        List<ReservationsDTO> GetBooking();
         ///<summary>
         ///Insertar Hoteles
         ///</summary>
-        Hoteles InsertHotel(Hoteles hotel);
+        Hotels InsertHotel(Hotels hotels);
         ///<summary>
         ///Insertar Habitaciones a Hoteles
         ///</summary>
-        Habitaciones InsertRoomByHotel(Habitaciones habitaciones);
+        Rooms InsertRoomByHotel(Rooms rooms);
         ///<summary>
         ///Obtener el Hotel Existente
         /// </summary>
-        Hoteles GetHotelById(Guid id);
+        Hotels GetHotelById(Guid id);
         ///<summary>
         ///Obtener la Habitacion Existente
         /// </summary>
-        Habitaciones GetRoomById(Guid id);
+        Rooms GetRoomById(Guid id);
         ///<summary>
         ///Actualizar el hotel existente
         /// </summary>
-        Hoteles UpdateHotel(Hoteles hoteles);
+        Hotels UpdateHotel(Hotels hotels);
         ///<summary>
         ///Actualizar la habitacion existente
         /// </summary>
-        Habitaciones UpdateRoom(Habitaciones habitaciones);
+        Rooms UpdateRoom(Rooms rooms);
     }
 }

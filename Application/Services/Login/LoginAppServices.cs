@@ -27,23 +27,23 @@ namespace BackSmartTalent.Application.Services.Login
         ///<summary>
         ///Login de administradores
         ///</summary>
-        public ResultResponse<Usuario> GetLoginAdmin(UsuarioDTO usuario)
+        public ResultResponse<User> GetLoginAdmin(UserDTO user)
         {
             try
             {
                 //Valdacion de campos
-                var validationErrors = _globalValidator.validateUser(usuario);
+                var validationErrors = _globalValidator.validateUser(user);
                 if (validationErrors != null)
                 {
                     return validationErrors;
                 }
 
-                Usuario getUser = _loginDomainServices.GetLoginAdmin(usuario);
+                User getUser = _loginDomainServices.GetLoginAdmin(user);
                 if (getUser == null)
                 {
-                    return new ResultResponse<Usuario>(false, RespuestasGlobales.LoginUsuarioNoEncontrado);
+                    return new ResultResponse<User>(false, GlobalResponses.LoginUsuarioNoEncontrado);
                 }
-                return new ResultResponse<Usuario>(true, getUser);
+                return new ResultResponse<User>(true, getUser);
             }
             catch (Exception ex)
             {
@@ -54,22 +54,22 @@ namespace BackSmartTalent.Application.Services.Login
         ///<summary>
         ///Login de Usuarios
         ///</summary>
-        public ResultResponse<Usuario> GetLoginUser(UsuarioDTO usuario)
+        public ResultResponse<User> GetLoginUser(UserDTO user)
         {
             try
             {
-                var validationErrors = _globalValidator.validateUser(usuario);
+                var validationErrors = _globalValidator.validateUser(user);
                 if (validationErrors != null)
                 {
                     return validationErrors;
                 }
 
-                Usuario getUser = _loginDomainServices.GetLoginUser(usuario);
+                User getUser = _loginDomainServices.GetLoginUser(user);
                 if (getUser == null)
                 {
-                    return new ResultResponse<Usuario>(false, RespuestasGlobales.LoginUsuarioNoEncontrado);
+                    return new ResultResponse<User>(false, GlobalResponses.LoginUsuarioNoEncontrado);
                 }
-                return new ResultResponse<Usuario>(true, getUser);
+                return new ResultResponse<User>(true, getUser);
             }
             catch (Exception ex)
             {

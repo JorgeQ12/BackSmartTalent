@@ -26,7 +26,7 @@ namespace BackSmartTalent.Controllers.ManagementAdmin
         ///</summary>
         [HttpGet]
         [Route(nameof(ManagementAdminController.GetBooking))]
-        public ResultResponse<List<ReservasDTO>> GetBooking() => _ManagementAdminAppServices.GetBooking();
+        public ResultResponse<List<ReservationsDTO>> GetBooking() => _ManagementAdminAppServices.GetBooking();
 
 
         ///<summary>
@@ -34,27 +34,27 @@ namespace BackSmartTalent.Controllers.ManagementAdmin
         ///</summary>
         [HttpPost]
         [Route(nameof(ManagementAdminController.InsertHotel))]
-        public ResultResponse<Hoteles> InsertHotel(HotelesDTO hotel) => _ManagementAdminAppServices.InsertHotel(hotel);
+        public ResultResponse<Hotels> InsertHotel(HotelsDTO hotels) => _ManagementAdminAppServices.InsertHotel(hotels);
 
         ///<summary>
         ///Insertar Habitaciones a Hoteles
         ///</summary>
         [HttpPost]
         [Route(nameof(ManagementAdminController.InsertRoomByHotel))]
-        public ResultResponse<Habitaciones> InsertRoomByHotel(HabitacionesDTO habitaciones) => _ManagementAdminAppServices.InsertRoomByHotel(habitaciones);
+        public ResultResponse<Rooms> InsertRoomByHotel(RoomsDTO rooms) => _ManagementAdminAppServices.InsertRoomByHotel(rooms);
 
         ///<summary>
         ///Actualizar el hotel existente
         ///</summary>
         [HttpPut]
         [Route(nameof(ManagementAdminController.UpdateHotel))]
-        public ResultResponse<Hoteles> UpdateHotel(HotelesUpdateDTO hotel) => _ManagementAdminAppServices.UpdateHotel(hotel);
+        public ResultResponse<Hotels> UpdateHotel(HotelsUpdateDTO hotels) => _ManagementAdminAppServices.UpdateHotel(hotels);
 
         ///<summary>
         ///Actualizar la habitacion existente
         ///</summary>
         [HttpPut]
         [Route(nameof(ManagementAdminController.UpdateRoom))]
-        public ResultResponse<Habitaciones> UpdateRoom(HabitacionesUpdateDTO habitaciones) => _ManagementAdminAppServices.UpdateRoom(habitaciones);
+        public ResultResponse<Rooms> UpdateRoom(RoomsUpdateDTO rooms) => _ManagementAdminAppServices.UpdateRoom(rooms);
     }
 }

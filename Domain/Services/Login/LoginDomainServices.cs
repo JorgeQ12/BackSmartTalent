@@ -19,13 +19,13 @@ namespace BackSmartTalent.Domain.Services.Login
         ///<summary>
         ///Login de Administradores
         ///</summary>
-        public Usuario GetLoginAdmin(UsuarioDTO usuario)
+        public User GetLoginAdmin(UserDTO user)
         {
             try
             {
-                return _context.Usuario
-                    .Where(x => x.NombreUsuario.Equals(usuario.NombreUsuarioDTO) && 
-                                x.Contraseña.Equals(usuario.ContraseñaDTO) && x.Administrador).FirstOrDefault();
+                return _context.User
+                    .Where(x => x.Username.Equals(user.UsernameDTO) && 
+                                x.Password.Equals(user.PasswordDTO) && x.Administrator).FirstOrDefault();
             }
             catch (Exception ex)
             {
@@ -35,13 +35,13 @@ namespace BackSmartTalent.Domain.Services.Login
         ///<summary>
         ///Login de Usuarios
         ///</summary>
-        public Usuario GetLoginUser(UsuarioDTO usuario)
+        public User GetLoginUser(UserDTO user)
         {
             try
             {
-                return _context.Usuario
-                    .Where(x => x.NombreUsuario.Equals(usuario.NombreUsuarioDTO) &&
-                                x.Contraseña.Equals(usuario.ContraseñaDTO) && !x.Administrador).FirstOrDefault();
+                return _context.User
+                    .Where(x => x.Username.Equals(user.UsernameDTO) &&
+                                x.Username.Equals(user.UsernameDTO) && !x.Administrator).FirstOrDefault();
             }
             catch (Exception ex)
             {

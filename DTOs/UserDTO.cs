@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace BackSmartTalent.DTOs
 {
-    public class UsuarioDTO
+    public class UserDTO
     {
-        public string NombreUsuarioDTO { get; set; }
-        public string ContraseñaDTO { get; set; }
+        public string UsernameDTO { get; set; }
+        public string PasswordDTO { get; set; }
     }
 }
