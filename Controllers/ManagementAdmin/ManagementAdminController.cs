@@ -56,5 +56,19 @@ namespace BackSmartTalent.Controllers.ManagementAdmin
         [HttpPut]
         [Route(nameof(ManagementAdminController.UpdateRoom))]
         public ResultResponse<Rooms> UpdateRoom(RoomsUpdateDTO rooms) => _ManagementAdminAppServices.UpdateRoom(rooms);
+
+        ///<summary>
+        ///Deshabilitar Hotel Existente
+        ///</summary>
+        [HttpPut]
+        [Route(nameof(ManagementAdminController.DisabledHotel))]
+        public ResultResponse<Hotels> DisabledHotel(DisabledHotelDTO hotels) => _ManagementAdminAppServices.DisabledHotel(hotels);
+
+        ///<summary>
+        ///Deshabilitar Habitacion del hotel Existente
+        ///</summary>
+        [HttpPut]
+        [Route(nameof(ManagementAdminController.DisabledRoomByHotel))]
+        public ResultResponse<Rooms> DisabledRoomByHotel(DisabledRoomByHotelDTO rooms) => _ManagementAdminAppServices.DisabledRoomByHotel(rooms);
     }
 }

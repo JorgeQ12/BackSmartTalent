@@ -22,6 +22,12 @@ namespace BackSmartTalent.DTOs
         public bool EnabledDTO { get; set; }
     }
 
+    public class DisabledHotelDTO
+    {
+        public Guid IdHotelsDTO { get; set; }
+        public bool EnabledDTO { get; set; }
+    }
+
     public class HotelsByCondition
     {
         public string NamesHotelsDTO { get; set; }

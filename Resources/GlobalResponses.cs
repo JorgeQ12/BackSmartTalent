@@ -37,7 +37,7 @@ namespace BackSmartTalent.Resources
         public const string ReservaCiudadDestinoRequerido = "La cuidad es requerida";
 
         public const string ReservaInsertada = "Reserva Registrada";
-
+        public const string NoEnabledNull = "No se puede dejar el campo Enabled en null";
         public const string ErrorInterno = "Error interno al crear el hotel";
     }
 }

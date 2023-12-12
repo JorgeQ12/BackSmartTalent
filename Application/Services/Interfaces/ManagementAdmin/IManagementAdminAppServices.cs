@@ -32,5 +32,13 @@ namespace BackSmartTalent.Application.Services.Interfaces.ManagementAdmin
         ///Actualizar la habitacion existente
         /// </summary>
         ResultResponse<Rooms> UpdateRoom(RoomsUpdateDTO rooms);
+        ///<summary>
+        ///Deshabilitar Hotel Existente
+        ///</summary>
+        ResultResponse<Hotels> DisabledHotel(DisabledHotelDTO hotels);
+        ///<summary>
+        ///Deshabilitar Habitacion del hotel Existente
+        ///</summary>
+        ResultResponse<Rooms> DisabledRoomByHotel(DisabledRoomByHotelDTO rooms);
     }
 }

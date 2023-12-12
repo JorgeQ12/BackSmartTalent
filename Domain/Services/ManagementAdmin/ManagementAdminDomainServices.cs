@@ -146,5 +146,40 @@ namespace BackSmartTalent.Application.Services.ManagementAdmin
                 throw new Exception(ex.Message);
             }
         }
+
+        ///<summary>
+        ///Deshabilitar Hotel Existente
+        ///</summary>
+        public Hotels DisabledHotel(Hotels hotels, DisabledHotelDTO disabledHotels)
+        {
+            try
+            {
+                hotels.Enabled = disabledHotels.EnabledDTO;
+                _context.Update(hotels);
+                _context.SaveChanges();
+                return hotels;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        ///<summary>
+        ///Deshabilitar Habitacion del hotel Existente
+        ///</summary>
+        public Rooms DisabledRoomByHotel(Rooms rooms, DisabledRoomByHotelDTO disabledRooms)
+        {
+            try
+            {
+                rooms.Enabled = disabledRooms.EnabledDTO;
+                _context.Update(rooms);
+                _context.SaveChanges();
+                return rooms;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

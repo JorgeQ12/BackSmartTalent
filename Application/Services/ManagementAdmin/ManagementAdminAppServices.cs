@@ -53,7 +53,7 @@ namespace BackSmartTalent.Application.Services.ManagementAdmin
             try
             {
                 //Validaciones
-                var validacionResult = _globalValidator.ValidarHotel(hotels);
+                var validacionResult = _globalValidator.validateHotel(hotels);
                 if (validacionResult != null)
                 {
                     return validacionResult;
@@ -74,7 +74,7 @@ namespace BackSmartTalent.Application.Services.ManagementAdmin
             try
             {
                 //Validaciones
-                var validacionResult = _globalValidator.ValidarHabitacion(rooms);
+                var validacionResult = _globalValidator.validateRoom(rooms);
                 if (validacionResult != null)
                 {
                     return validacionResult;
@@ -95,7 +95,7 @@ namespace BackSmartTalent.Application.Services.ManagementAdmin
             try
             {
                 //Validaciones
-                var validacionResult = _globalValidator.ValidarHotelUpdate(hotels);
+                var validacionResult = _globalValidator.validateHotelUpdate(hotels);
                 if (validacionResult != null)
                 {
                     return validacionResult;
@@ -123,7 +123,7 @@ namespace BackSmartTalent.Application.Services.ManagementAdmin
             try
             {
                 //Validaciones
-                var validacionResult = _globalValidator.ValidarHabitacionUpdate(rooms);
+                var validacionResult = _globalValidator.validateRoomUpdate(rooms);
                 if (validacionResult != null)
                 {
                     return validacionResult;
@@ -137,6 +137,68 @@ namespace BackSmartTalent.Application.Services.ManagementAdmin
                 }
 
                 _IManagementAdminDomainServices.UpdateRoom(_mapper.Map(rooms, roomsExist));
+
+                return new ResultResponse<Rooms>(true, GlobalResponses.HabitacionActualizadaCorrectamente);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        ///<summary>
+        ///Deshabilitar Hotel Existente
+        ///</summary>
+        public ResultResponse<Hotels> DisabledHotel(DisabledHotelDTO hotels)
+        {
+            try
+            {
+                //Validaciones
+                var validacionResult = _globalValidator.validateDisabledHotelUpdate(hotels);
+                if (validacionResult != null)
+                {
+                    return validacionResult;
+                }
+
+                //Obtenemos el Hotel
+                var hotelExist = _IManagementAdminDomainServices.GetHotelById(hotels.IdHotelsDTO);
+                if (hotelExist == null)
+                {
+                    return new ResultResponse<Hotels>(false, GlobalResponses.NoFoundHotel);
+                }
+
+                _IManagementAdminDomainServices.DisabledHotel(hotelExist, hotels);
+
+                return new ResultResponse<Hotels>(true, GlobalResponses.HotelActualizadoCorrectamente);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        ///<summary>
+        ///Deshabilitar Habitacion del hotel Existente
+        ///</summary>
+        public ResultResponse<Rooms> DisabledRoomByHotel(DisabledRoomByHotelDTO rooms)
+        {
+            try
+            {
+                //Validaciones
+                var validacionResult = _globalValidator.validateDisabledRoomUpdate(rooms);
+                if (validacionResult != null)
+                {
+                    return validacionResult;
+                }
+
+                //Obtenemos la habitacion
+                var roomsExist = _IManagementAdminDomainServices.GetRoomById(rooms.IdRoomDTO);
+                if (roomsExist == null)
+                {
+                    return new ResultResponse<Rooms>(false, GlobalResponses.NoFoundRoom);
+                }
+
+                _IManagementAdminDomainServices.DisabledRoomByHotel(roomsExist, rooms);
 
                 return new ResultResponse<Rooms>(true, GlobalResponses.HabitacionActualizadaCorrectamente);
             }

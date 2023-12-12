@@ -27,7 +27,7 @@ namespace BackSmartTalent.Validators
             return null;
         }
 
-        public ResultResponse<Rooms> ValidarHabitacion(RoomsDTO rooms)
+        public ResultResponse<Rooms> validateRoom(RoomsDTO rooms)
         {
             if (rooms.IdHotelsDTO.Equals(Guid.Empty))
             {
@@ -62,7 +62,7 @@ namespace BackSmartTalent.Validators
             return null;
         }
 
-        public ResultResponse<Hotels> ValidarHotel(HotelsDTO hotels)
+        public ResultResponse<Hotels> validateHotel(HotelsDTO hotels)
         {
             if (string.IsNullOrWhiteSpace(hotels.NamesDTO))
             {
@@ -76,7 +76,7 @@ namespace BackSmartTalent.Validators
             return null;
         }
 
-        public ResultResponse<Hotels> ValidarHotelUpdate(HotelsUpdateDTO hotels)
+        public ResultResponse<Hotels> validateHotelUpdate(HotelsUpdateDTO hotels)
         {
             if (hotels.IdHotelsDTO.Equals(Guid.Empty))
             {
@@ -94,7 +94,7 @@ namespace BackSmartTalent.Validators
             return null;
         }
 
-        public ResultResponse<Rooms> ValidarHabitacionUpdate(RoomsUpdateDTO rooms)
+        public ResultResponse<Rooms> validateRoomUpdate(RoomsUpdateDTO rooms)
         {
             if (rooms.IdRoomDTO.Equals(Guid.Empty))
             {
@@ -128,6 +128,34 @@ namespace BackSmartTalent.Validators
             if (string.IsNullOrWhiteSpace(rooms.LocationDTO))
             {
                 return new ResultResponse<Rooms>(false, GlobalResponses.ErrorDireccionHotel);
+            }
+
+            return null;
+        }
+
+        public ResultResponse<Hotels> validateDisabledHotelUpdate(DisabledHotelDTO hotels)
+        {
+            if (hotels.IdHotelsDTO.Equals(Guid.Empty))
+            {
+                return new ResultResponse<Hotels>(false, GlobalResponses.ErrorIdHotel);
+            }
+            if (hotels.EnabledDTO == null)
+            {
+                return new ResultResponse<Hotels>(false, GlobalResponses.NoEnabledNull);
+            }
+
+            return null;
+        }
+
+        public ResultResponse<Rooms> validateDisabledRoomUpdate(DisabledRoomByHotelDTO rooms)
+        {
+            if (rooms.IdRoomDTO.Equals(Guid.Empty))
+            {
+                return new ResultResponse<Rooms>(false, GlobalResponses.NoRelacionHabitacion);
+            }
+            if (rooms.EnabledDTO == null)
+            {
+                return new ResultResponse<Rooms>(false, GlobalResponses.NoEnabledNull);
             }
 
             return null;
